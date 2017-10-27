@@ -1,3 +1,7 @@
+bld
+testConf.json
+pems.json
+
 # Logs
 logs
 *.log
@@ -56,4 +60,3 @@ typings/
 
 # dotenv environment variables file
 .env
-

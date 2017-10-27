@@ -1,0 +1,36 @@
+{
+  "name": "aws-cognito-auth-server",
+  "version": "1.0.0",
+  "description": "An AWS Cognito authorization server.",
+  "main": "bld/main.js",
+  "scripts": {
+    "build": "babel src --out-dir bld",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hannes-hochreiner/aws-cognito-auth-server.git"
+  },
+  "author": "Hannes Hochreiner <hannes@hochreiner.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hannes-hochreiner/aws-cognito-auth-server/issues"
+  },
+  "homepage": "https://github.com/hannes-hochreiner/aws-cognito-auth-server#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "dependencies": {
+    "commander": "^2.11.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "jwk-to-pem": "^1.2.6"
+  }
+}
