@@ -1,30 +1,42 @@
+import {default as commander} from 'commander';
+import {default as http} from 'http';
+
 import {readFile} from './fs';
 import {openOrCreatePems, authorize} from './utils';
-import {default as commander} from 'commander';
-import {default as express} from 'express';
 
 commander.option('-c, --configuration [path]', 'path of the configuration file').parse(process.argv);
 
 let _conf;
 let _pems;
-let _app = express();
 
-_app.get('/', function (req, res) {
-  let path = req.get('X-Original-URI');
-  let token = req.get('Authorization').split(' ')[1];
-  let verb = req.get('X-Original-METHOD');
+let server = new http.Server();
 
-  authorize(_conf, _pems, token, path, verb).then(result => {
-    if (result) {
-      res.sendStatus(200);
-      return;
-    }
+server.on('request', (request, response) => {
+  try {
+    let token = request.headers.authorization.split(' ')[1];
+    let path = request.url;
+    let verb = request.method;
 
-    res.sendStatus(403);
-  }).catch(err => {
-    res.sendStatus(500);
-  });
-})
+    authorize(_conf, _pems, token, path, verb).then(result => {
+      if (result) {
+        response.statusCode = 200;
+      } else {
+        response.statusCode = 403;
+      }
+
+      console.log(`${request.method} ${request.url} ${response.statusCode}`);
+      response.end();
+    }).catch(err => {
+      console.dir(err);
+      response.statusCode = 500;
+      response.end();
+    });
+  } catch (error) {
+    console.dir(error);
+    response.statusCode = 500;
+    response.end();
+  }
+});
 
 readFile(commander.configuration).then(data => {
   _conf = JSON.parse(data);
@@ -32,7 +44,7 @@ readFile(commander.configuration).then(data => {
   return openOrCreatePems(_conf.pemsPath, _conf.keyUrl);
 }).then(pems => {
   _pems = pems;
-  _app.listen(8888);
+  server.listen(8888);
 }).catch(error => {
   console.log(error);
 });
