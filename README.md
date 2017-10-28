@@ -3,6 +3,8 @@
 ## Expected headers
 ```
 Authorization: Bearer XXXX
+X-Original-URI: XXXX
+X-Original-METHOD: XXXX
 ```
 
 ## Configuration file

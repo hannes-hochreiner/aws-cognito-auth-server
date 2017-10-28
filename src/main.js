@@ -14,8 +14,8 @@ let server = new http.Server();
 server.on('request', (request, response) => {
   try {
     let token = request.headers.authorization.split(' ')[1];
-    let path = request.url;
-    let verb = request.method;
+    let path = request.headers['x-original-uri'];
+    let verb = request.headers['x-original-method'];
 
     authorize(_conf, _pems, token, path, verb).then(result => {
       if (result) {
@@ -24,7 +24,7 @@ server.on('request', (request, response) => {
         response.statusCode = 403;
       }
 
-      console.log(`${request.method} ${request.url} ${response.statusCode}`);
+      console.log(`${verb} ${path} ${response.statusCode}`);
       response.end();
     }).catch(err => {
       console.dir(err);
