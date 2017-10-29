@@ -14,14 +14,6 @@ let server = new http.Server();
 server.on('request', (request, response) => {
   try {
     let verb = request.headers['x-original-method'];
-
-    if (verb === 'OPTIONS') {
-      response.statusCode = 200;
-      console.log(`${verb} ${path} ${response.statusCode}`);
-      response.end();
-      return;
-    }
-
     let path = request.headers['x-original-uri'];
     let token = request.headers.authorization.split(' ')[1];
 
