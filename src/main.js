@@ -13,9 +13,17 @@ let server = new http.Server();
 
 server.on('request', (request, response) => {
   try {
-    let token = request.headers.authorization.split(' ')[1];
-    let path = request.headers['x-original-uri'];
     let verb = request.headers['x-original-method'];
+
+    if (verb === 'OPTIONS') {
+      response.statusCode = 200;
+      console.log(`${verb} ${path} ${response.statusCode}`);
+      response.end();
+      return;
+    }
+
+    let path = request.headers['x-original-uri'];
+    let token = request.headers.authorization.split(' ')[1];
 
     authorize(_conf, _pems, token, path, verb).then(result => {
       if (result) {
