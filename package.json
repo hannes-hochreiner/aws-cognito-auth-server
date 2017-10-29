@@ -1,6 +1,6 @@
 {
   "name": "aws-cognito-auth-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An AWS Cognito authorization server.",
   "main": "bld/main.js",
   "scripts": {
