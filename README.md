@@ -50,7 +50,7 @@ http {
 ```
 
 ## References
-[Integrating Cognito with API gateway](https://aws.amazon.com/blogs/mobile/integrating-amazon-cognito-user-pools-with-api-gateway/)
-[Using tokens](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html)
-[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-[jwk-to-pem](https://www.npmjs.com/package/jwk-to-pem)
+  * [Integrating Cognito with API gateway](https://aws.amazon.com/blogs/mobile/integrating-amazon-cognito-user-pools-with-api-gateway/)
+  * [Using tokens](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html)
+  * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+  * [jwk-to-pem](https://www.npmjs.com/package/jwk-to-pem)
