@@ -34,14 +34,10 @@ function _sortDescendingByLength(elem1, elem2) {
 
 export function authorize(conf, pems, token, path, verb) {
   return validateToken(pems, token, conf.iss).then(id => {
-    let ids = [id.sub];
-
-    id['cognito:groups'].forEach(grp => {
-      ids.push(grp);
-    });
+    let res = { authorized: false };
 
     if (!conf.auth) {
-      return false;
+      return res;
     }
 
     let paths = Object.keys(conf.auth).filter(elem => {
@@ -49,17 +45,24 @@ export function authorize(conf, pems, token, path, verb) {
     });
 
     if (paths.length == 0) {
-      return false;
+      return res;
     }
 
     let relevantPath = paths.sort(_sortDescendingByLength)[0];
 
     if (!conf.auth[relevantPath][verb.toUpperCase()]) {
-      return false;
+      return res;
     }
 
-    let someFun = ids.includes.bind(ids);
+    let checkVals = [id.sub].concat(id['cognito:groups']);
+    let someFun = checkVals.includes.bind(checkVals);
 
-    return conf.auth[relevantPath][verb.toUpperCase()].some(someFun);
+    if (conf.auth[relevantPath][verb.toUpperCase()].some(someFun)) {
+      res.authorized = true;
+      res.id = id.sub;
+      res.groups = id['cognito:groups'];
+    }
+
+    return res;
   });
 }

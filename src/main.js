@@ -18,13 +18,15 @@ server.on('request', (request, response) => {
     let token = request.headers.authorization.split(' ')[1];
 
     authorize(_conf, _pems, token, path, verb).then(result => {
-      if (result) {
+      if (result.authorized) {
         response.statusCode = 200;
+        response.setHeader("x-id", result.id);
+        response.setHeader("x-groups", result.groups.join(','));
       } else {
         response.statusCode = 403;
       }
 
-      console.log(`${verb} ${path} ${response.statusCode}`);
+      console.log(`${(new Date()).toISOString()}\t${response.statusCode}\t${verb}\t${path}`);
       response.end();
     }).catch(err => {
       console.dir(err);
