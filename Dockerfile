@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:latest
 MAINTAINER Hannes Hochreiner <hannes@hochreiner.net>
 RUN apk add --no-cache nodejs nodejs-npm
 RUN mkdir -p /opt/aws-cognito-auth-server
