@@ -41,8 +41,15 @@ http {
     ...
     server {
     ...
-        location /rss-json-service/ {
+        location /couchdb/ {
             auth_request     /auth;
+            auth_request_set $auth_user $upstream_http_x_id;
+            auth_request_set $auth_groups $upstream_http_x_groups;
+            proxy_set_header X-Auth-CouchDB-UserName $auth_user;
+            proxy_set_header X-Auth-CouchDB-Roles $auth_groups;
+            proxy_pass         http://couchdb:5984;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
         }
 
         location = /auth {
