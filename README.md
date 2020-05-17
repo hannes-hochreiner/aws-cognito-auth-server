@@ -21,6 +21,11 @@ It can be configured by modifying the command parameter "-c".
   "iss": "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXXXX",
   "keyUrl": "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXXXX/.well-known/jwks.json",
   "pemsPath": "pems.json",
+  "headerNames": {
+    "method": "x-forwarded-method",
+    "uri": "x-forwarded-uri",
+    "groups": "x-groups"
+  },
   "auth": {
     "/": {
       "GET": ["group1"]
