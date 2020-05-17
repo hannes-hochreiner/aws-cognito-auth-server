@@ -26,7 +26,7 @@ server.on('request', (request, response) => {
         response.statusCode = 403;
       }
 
-      console.log(`${(new Date()).toISOString()}\t${response.statusCode}\t${verb}\t${path}`);
+      console.log(`${(new Date()).toISOString()}\t${response.statusCode}\t${verb}\t${path}\t${_conf.headerNames.id}:${result.id};${_conf.headerNames.groups}:${result.groups.join(',')}`);
       response.end();
     }).catch(err => {
       console.dir(err);
