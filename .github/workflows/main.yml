@@ -1,0 +1,26 @@
+name: CI
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm test
+  publish:
+    name: Publish to Docker
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Create and publish to Docker Hub
+      uses: hannes-hochreiner/github-actions/publish-on-docker-hub@v1.3.3
+      with:
+        docker-user-name: ${{ secrets.DOCKER_USER }}
+        docker-token: ${{ secrets.DOCKER_TOKEN }}
