@@ -20,7 +20,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
     - name: Create and publish to Docker Hub
-      uses: hannes-hochreiner/gha-publish-on-docker-hub@v1.4.0
+      uses: hannes-hochreiner/gha-publish-on-docker-hub@v1.4.1
       with:
         docker-user-name: ${{ secrets.DOCKER_USER }}
         docker-token: ${{ secrets.DOCKER_TOKEN }}
