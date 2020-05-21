@@ -1,3 +1,4 @@
+![CI](https://github.com/hannes-hochreiner/aws-cognito-auth-server/workflows/CI/badge.svg)
 # AWS Cognito authorization server
 
 ## Expected headers
