@@ -16,7 +16,7 @@ x-groups: <comma separated group-ids>
 ## Configuration file
 In the Docker container, the configuration file is expected at "/var/aws-cognito-auth-server/config.json".
 It can be configured by modifying the command parameter "-c".
-```
+```JSON
 {
   "iss": "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXXXX",
   "keyUrl": "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXXXX/.well-known/jwks.json",
@@ -24,6 +24,7 @@ It can be configured by modifying the command parameter "-c".
   "headerNames": {
     "method": "x-forwarded-method",
     "uri": "x-forwarded-uri",
+    "id": "x-id",
     "groups": "x-groups"
   },
   "auth": {
