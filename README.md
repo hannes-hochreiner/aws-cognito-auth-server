@@ -2,6 +2,7 @@
 # AWS Cognito authorization server
 
 ## Expected headers
+The names of the expected headers can be configured.
 ```
 Authorization: Bearer XXXX
 X-Original-URI: XXXX
