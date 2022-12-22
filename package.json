@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "commander": "^2.11.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "jwk-to-pem": "^1.2.6"
   }
 }
